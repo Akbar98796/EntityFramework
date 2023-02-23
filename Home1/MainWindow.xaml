@@ -1,0 +1,108 @@
+﻿<Window x:Class="WpfApp4.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        ResizeMode="CanMinimize"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        xmlns:local="clr-namespace:WpfApp4"
+        mc:Ignorable="d"
+        Title="Home work" Height="450" Width="800">
+
+    <Window.Resources>
+        <Style x:Key="SmallBlackBtn" TargetType="Button">
+            <Setter Property="Foreground" Value="{StaticResource MaterialDesignDarkForeground}"/>
+            <Setter Property="Background" Value="{StaticResource MaterialDesignDarkBackground}"/>
+            <Setter Property="Width" Value="95"></Setter>
+            <Setter Property="Height" Value="40"></Setter>
+            <Setter Property="Margin" Value="0 0 2 0"></Setter>
+        </Style>
+
+        <Style x:Key="CarPageTextBox"  TargetType="TextBox">
+            <Setter Property="Margin" Value="0 0 10 0"></Setter>
+        </Style>
+
+        <Style x:Key="CarPageTextBLock"  TargetType="TextBlock">
+            <Setter Property="Margin" Value="0 0 10 0"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.15*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Button Grid.Column="0" Grid.Row="0" Content="Add" Style="{StaticResource SmallBlackBtn}" HorizontalAlignment="Left" Margin="5 0 0 0" Click="ButtonAdd_Click"/>
+        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Save Changes" Style="{StaticResource SmallBlackBtn}" Click="ButtonSaveChanges_Click"/>
+            <Button Content="Delete" Style="{StaticResource SmallBlackBtn}" Click="ButtonDelete_Click"/>
+            <Button Content="Refresh" Style="{StaticResource SmallBlackBtn}" Click="ButtonRefresh_Click"/>
+        </StackPanel>
+
+        <Border Grid.Column="0" Grid.Row="1" Margin="5">
+            <Border.Background>
+                <SolidColorBrush Color="#FF303030"></SolidColorBrush>
+            </Border.Background>
+            <StackPanel  Margin="10 10 50 10">
+                <TextBox Text="{Binding Car.CarBrand.CarBrand}" Foreground="White" materialDesign:HintAssist.Hint="Enter Car Brand"/>
+                <TextBox Text="{Binding Car.Model}" Foreground="White" materialDesign:HintAssist.Hint="Enter Model"/>
+                <TextBox Text="{Binding Car.CarColor.Color}" Foreground="White" materialDesign:HintAssist.Hint="Enter Color"/>
+                <TextBox Text="{Binding Car.Year}" Foreground="White" materialDesign:HintAssist.Hint="Enter Year"/>
+                <TextBox Text="{Binding Car.Description}" Foreground="White" materialDesign:HintAssist.Hint="Enter Description"/>
+            </StackPanel>
+        </Border>
+
+        <ScrollViewer Grid.Column="1" Grid.Row="1" materialDesign:ScrollViewerAssist.BubbleVerticalScroll="True" Foreground="{StaticResource MaterialDesignDarkForeground}" Margin="5">
+            <ListBox Name="CarList" ItemsSource="{Binding Cars}" Foreground="{StaticResource MaterialDesignDarkForeground}" Background="{StaticResource MaterialDesignDarkBackground}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Background="{StaticResource MaterialDesignLightBackground}"  Margin="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Style="{StaticResource CarPageTextBLock}" Grid.Column="0" Grid.Row="0" Text="Car Brand: "/>
+                            <TextBlock Style="{StaticResource CarPageTextBLock}" Grid.Column="0" Grid.Row="1" Text="Model: "/>
+                            <TextBlock Style="{StaticResource CarPageTextBLock}" Grid.Column="0" Grid.Row="2" Text="Color: "/>
+                            <TextBlock Style="{StaticResource CarPageTextBLock}" Grid.Column="0" Grid.Row="3" Text="Year: "/>
+                            <TextBlock Style="{StaticResource CarPageTextBLock}" Grid.Column="0" Grid.Row="4" Text="Description: "/>
+
+                            <TextBox Style="{StaticResource CarPageTextBox}" Grid.Column="1" Grid.Row="0" Text="{Binding CarBrand.CarBrand}"/>
+                            <TextBox Style="{StaticResource CarPageTextBox}" Grid.Column="1" Grid.Row="1" Text="{Binding Model}"/>
+                            <TextBox Style="{StaticResource CarPageTextBox}" Grid.Column="1" Grid.Row="2" Text="{Binding CarColor.Color}"/>
+                            <TextBox Style="{StaticResource CarPageTextBox}" Grid.Column="1" Grid.Row="3" Text="{Binding Year}"/>
+                            <TextBox Style="{StaticResource CarPageTextBox}" Grid.Column="1" Grid.Row="4" Text="{Binding Description}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ListBox>
+        </ScrollViewer>
+    </Grid>
+  
+</Window>
